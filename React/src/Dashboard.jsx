@@ -26,6 +26,7 @@ import AnalysisPage from './AnalysisPage.jsx'
 import UploadPage from './UploadPage.jsx'
 import HomePage from './HomePage.jsx'
 import SpinnerPage from './SpinnerPage.jsx'
+import EnhancedTableHead  from './EnhancedTableHead.jsx'
 
 const drawerWidth = 240;
 
@@ -255,7 +256,7 @@ class Dashboard extends React.Component {
         <main className={classes.main}>
           <div className={classes.appBarSpacer} />
           {this.state.page == "upload" && <UploadPage  loadSpinner={this.loadSpinner} />}
-          {this.state.page == "analysis" &&  <AnalysisPage  data={this.state.data} />}
+          {this.state.page == "analysis" &&  <EnhancedTableHead />}
           {this.state.page == "home" && <HomePage />}
           {this.state.page == "spinner" && <SpinnerPage />}
         </main>
