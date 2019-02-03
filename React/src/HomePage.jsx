@@ -11,15 +11,15 @@ const styles = ({
     	display: 'flex',
     	width: '100%',
     	height: '100%',
-        backgroundImage: `url(https://cdn1.marklogic.com/wp-content/uploads/2018/09/home-hero-marklogic-data-hub-service-v1-1600x700.jpg)`,
+        backgroundImage: `url(https://www.slohacks.com/static/baker.4c856e2a.png)`,
     	backgroundSize: 'cover',
     	backgroundPosition: 'center'
     },
     startButton: {
     	position: 'relative',
-    	top: '35%',
-    	left: '25%',
-        color: 'white',
+    	top: '15%',
+    	left: '10%',
+        color: 'black',
     	width: 40,
     	height: 40
     }
@@ -35,7 +35,7 @@ class HomePage extends React.Component{
 
             <div style={styles.startButton}>
                 <h2>
-                    DATA CLASSIFIER
+                    Anomaly Detection
                 </h2>
 
                 <div>

@@ -206,25 +206,27 @@ class Dashboard extends React.Component {
           <Divider />
           <List>
             <div>
-              <ListSubheader inset>Saved Ontologies</ListSubheader>
+              
+              <ListSubheader inset>Anomaly Collections</ListSubheader>
               <ListItem button>
                 <ListItemIcon>
                   <AssignmentIcon />
                 </ListItemIcon>
-                <ListItemText primary="Ontology A" />
+                <ListItemText primary="Manufacturers" />
               </ListItem>
               <ListItem button>
                 <ListItemIcon>
                   <AssignmentIcon />
                 </ListItemIcon>
-                <ListItemText primary="Ontology B" />
+                <ListItemText primary="Distributors" />
               </ListItem>
               <ListItem button>
                 <ListItemIcon>
                   <AssignmentIcon />
                 </ListItemIcon>
-                <ListItemText primary="Ontology C" />
+                <ListItemText primary="Retailers" />
               </ListItem>
+              
             </div>  
           </List>
         </Drawer>
