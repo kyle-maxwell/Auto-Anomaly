@@ -1,0 +1,4 @@
+flask
+strsim
+pandas
+sklearn

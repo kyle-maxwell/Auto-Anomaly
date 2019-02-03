@@ -1,0 +1,7 @@
+package-lock.json
+node_modules/*
+.idea/*
+static/bundle.js
+log
+ML/.ipynb_checkpoints/
+Lucky7-Capstone.iml
