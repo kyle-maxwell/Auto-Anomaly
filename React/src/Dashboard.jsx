@@ -25,6 +25,7 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import AnalysisPage from './AnalysisPage.jsx'
 import UploadPage from './UploadPage.jsx'
 import HomePage from './HomePage.jsx'
+import SpinnerPage from './SpinnerPage.jsx'
 
 const drawerWidth = 240;
 
@@ -119,9 +120,29 @@ class Dashboard extends React.Component {
       data: JSON.parse(data),
       page: "analysis"
     });
+
    // console.log(data);
   }
-  
+
+  loadSpinner = () => {
+    this.setState({
+      //data: JSON.parse(data),
+      page: "spinner"
+    });
+
+    this.delayState();
+   // console.log(data);
+  } 
+
+  delayState = () => {
+    setTimeout(
+    function() {
+        this.setState({page: 'home'});
+    }
+    .bind(this),
+    3000);
+  };
+
   handleDrawerOpen = () => {
     this.setState({ open: true });
   };
@@ -231,9 +252,10 @@ class Dashboard extends React.Component {
 
         <main className={classes.main}>
           <div className={classes.appBarSpacer} />
-          {this.state.page == "upload" && <UploadPage  handleData={this.saveData} />}
+          {this.state.page == "upload" && <UploadPage  loadSpinner={this.loadSpinner} />}
           {this.state.page == "analysis" &&  <AnalysisPage  data={this.state.data} />}
           {this.state.page == "home" && <HomePage />}
+          {this.state.page == "spinner" && <SpinnerPage />}
         </main>
         
       </div>

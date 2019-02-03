@@ -31,7 +31,7 @@ def swap_accs(row):
     else:
         return 3 # 'MISC'
     
-def swap_orgs(row):
+def swap_orgs_final(row):
     return orgz[row['finals']]
 
 
@@ -61,7 +61,7 @@ def strip_extra_description(row):
     even_less = re.split(r'\*l*', less)[0]
     return even_less
 
-
+top15 = {}
 numerical_vals = {}
 def take_first(data):
     for desc in data['PROC_NAME'].split(' '):
@@ -93,7 +93,7 @@ def everything_lol(df):
     # Grouping Orgs
     dropped_vals['GROUPED_ORG'] = dropped_vals['ORGANIZATION NUMBER'].str.strip('0123456789-_')
     dropped_vals['finals'] = dropped_vals.apply(swap_orgs, axis=1)
-    dropped_vals['fin_org_num'] = dropped_vals.apply(swap_orgs, axis=1)
+    dropped_vals['fin_org_num'] = dropped_vals.apply(swap_orgs_final, axis=1)
     onehotting5 = to_categorical(dropped_vals['fin_org_num'].values[:,np.newaxis]).tolist()
 
     
@@ -116,6 +116,7 @@ def everything_lol(df):
     # Save np array
     np.save('with_date.npy', with_date)
     
+    return
     
     ## ITEM DESCRIPTION WORK
     dropped_vals['PROC_NAME'] = dropped_vals['DC_PROD_NAME'].str.lower()#strip('0123456789-_')

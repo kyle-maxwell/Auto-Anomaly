@@ -4,7 +4,7 @@ import os
 from werkzeug import secure_filename
 from flask import Flask, render_template, request
 import pandas as pd
-
+from ML.CleanData import everything_lol
 
 
 app = Flask(__name__)
@@ -19,12 +19,12 @@ def test():
 
 @app.route('/api/upload', methods = ['POST'])
 def upload_file():
-	file = request.files['file']
-	df = pd.read_csv(file)
-
-	resp = {} #placeholder
+    # file = request.files['file']
+    # df = pd.read_csv(file)
+    # everything_lol(df)
+    resp = {} #placeholder
 	#resp = data_classifier(df)
-	return json.dumps(resp)
+    return json.dumps(resp)
    	
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=os.environ.get('PORT', 3000), debug=True)
