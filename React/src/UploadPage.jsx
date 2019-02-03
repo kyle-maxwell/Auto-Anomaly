@@ -21,18 +21,21 @@ class UploadPage extends Component{
   	}
 
 	handleUploadImage(ev) {
-	    ev.preventDefault();
+        this.props.loadSpinner();
+	    // ev.preventDefault();
 
-	    const data = new FormData();
-	    data.append('file', this.uploadInput.files[0]);
-	    fetch('api/upload', {
-	      method: 'POST',
-	      body: data,
-	    }).then((response) => {
-	      response.json().then((body) => {
-	        this.props.handleData(body);
-	      });
-	    });
+	    // const data = new FormData();
+	    // data.append('file', this.uploadInput.files[0]);
+	    // fetch('api/upload', {
+	    //   method: 'POST',
+	    //   body: data,
+	    // }).then((response) => {
+	    //   response.json().then((body) => {
+	    //     this.props.handleData(body);
+	    //   });
+	    // });
+
+
 	}
 
   	render() {
