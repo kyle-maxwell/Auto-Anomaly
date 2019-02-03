@@ -11,7 +11,7 @@ const styles = ({
     	display: 'flex',
     	width: '100%',
     	height: '100%',
-        backgroundImage: `url(https://www.slohacks.com/static/baker.4c856e2a.png)`,
+        backgroundImage: `url(https://i.imgur.com/5Rs2quV.png)`,
     	backgroundSize: 'cover',
     	backgroundPosition: 'center'
     },
@@ -32,19 +32,6 @@ class HomePage extends React.Component{
         return(
         	
           <div style={styles.paperContainer}>
-
-            <div style={styles.startButton}>
-                <h2>
-                    Anomaly Detection
-                </h2>
-
-                <div>
-                    <Button variant="contained" color="secondary">
-        	            Start
-                    </Button>
-                </div>
-
-            </div>
 
           </div>
 

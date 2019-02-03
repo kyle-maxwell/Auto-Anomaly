@@ -20,9 +20,11 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 
 let counter = 0;
-function createData(name, calories, fat, carbs, protein) {
+function createData(name, org, act, trans, delivQ, delivP, uniP) {
   counter += 1;
-  return { id: counter, name, calories, fat, carbs, protein };
+  let test = { id: counter, name, org, act, trans, delivQ, delivP, uniP};
+  console.log(test);
+  return test; // { id: counter, name, org, act, trans, delivQ, delivP, uniP};
 }
 
 function desc(a, b, orderBy) {
@@ -50,11 +52,13 @@ function getSorting(order, orderBy) {
 }
 
 const rows = [
-  { id: 'name', numeric: false, disablePadding: true, label: 'Dessert (100g serving)' },
-  { id: 'calories', numeric: true, disablePadding: false, label: 'Calories' },
-  { id: 'fat', numeric: true, disablePadding: false, label: 'Fat (g)' },
-  { id: 'carbs', numeric: true, disablePadding: false, label: 'Carbs (g)' },
-  { id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)' },
+  { id: 'name', numeric: false, disablePadding: true, label: 'Product Name' },
+  { id: 'org', numeric: false, disablePadding: false, label: 'Organization Name' },
+  { id: 'act', numeric: false, disablePadding: false, label: 'Account Name' },
+  { id: 'trans', numeric: false, disablePadding: false, label: 'Transaction Date' },
+  { id: 'delivQ', numeric: true, disablePadding: false, label: 'Delivered Quantity' },
+  { id: 'delivP', numeric: true, disablePadding: false, label: 'Delivered Price' },
+  { id: 'uniP', numeric: true, disablePadding: false, label: 'Unit Price' },
 ];
 
 class EnhancedTableHead extends React.Component {
@@ -156,7 +160,7 @@ let EnhancedTableToolbar = props => {
           </Typography>
         ) : (
           <Typography variant="h6" id="tableTitle">
-            Nutrition
+          Detected Anomalies
           </Typography>
         )}
       </div>
@@ -198,6 +202,11 @@ const styles = theme => ({
   tableWrapper: {
     overflowX: 'auto',
   },
+  image: {
+    position: 'center',
+    justifyContent: 'center',
+    align: 'center',
+  }
 });
 
 class EnhancedTable extends React.Component {
@@ -206,22 +215,210 @@ class EnhancedTable extends React.Component {
     orderBy: 'calories',
     selected: [],
     data: [
-      createData('Cupcake', 305, 3.7, 67, 4.3),
-      createData('Donut', 452, 25.0, 51, 4.9),
-      createData('Eclair', 262, 16.0, 24, 6.0),
-      createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-      createData('Gingerbread', 356, 16.0, 49, 3.9),
-      createData('Honeycomb', 408, 3.2, 87, 6.5),
-      createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-      createData('Jelly Bean', 375, 0.0, 94, 0.0),
-      createData('KitKat', 518, 26.0, 65, 7.0),
-      createData('Lollipop', 392, 0.2, 98, 0.0),
-      createData('Marshmallow', 318, 0, 81, 2.0),
-      createData('Nougat', 360, 19.0, 9, 37.0),
-      createData('Oreo', 437, 18.0, 63, 4.0),
+createData('TRIGGER,SPRAY,RED&WHT,9.75" DIP TUBE', 'WASSER_49',
+        'BRINKER TEST KITCHEN', '18-OCT-17', 10.0, 3.1, 0.31),
+       createData('BOTTLE, SPRAY, 32OZ,CENTER NECK,9 3/8"H', 'WASSER_49',
+        'BRINKER TEST KITCHEN', '18-OCT-17', 10.0, 4.0, 0.4),
+       createData('BEEF BURGER 8 OZ FRESH', 'MAINES_1-BRINKER',
+        "CHILI\'S BRINKER OFFC ACCT", '15-JUN-18', 4.0, 325.84, 81.46),
+       createData('CHGS FOR FUEL SURCHARGE', 'SYSCO006', 'BRINKER TEST KITCHEN',
+        '14-NOV-18', 1.0, 10.0, 10.0),
+       createData('CREPE PLAIN 6', 'SYSCO013', 'BRINKER INTERNATIONAL CORP',
+        '14-NOV-18', 2.0, 70.56, 35.28),
+       createData('CREPE PLAIN 6', 'SYSCO013', 'BRINKER INTERNATIONAL CORP',
+        '14-NOV-18', 2.0, 70.56, 35.28),
+       createData('CHICKEN CVP BRST BNLS SKLS ESL', 'SYSCO006',
+        'BRINKER TEST KITCHEN', '14-NOV-18', 1.0, 42.21, 42.21),
+       createData('TORTILLA CHIP CORN WHTE', 'MAINES_1-BRINKER',
+        "CHILI\'S BRINKER OFFC ACCT", '15-SEP-18', 13.0, 179.79, 13.83),
+       createData('TORTILLA CHIP CORN WHTE', 'MAINES_1-BRINKER',
+        "CHILI\'S BRINKER OFFC ACCT", '15-SEP-18', 13.0, 179.79, 13.83),
+       createData('TORTILLA CHIP CORN WHTE', 'MAINES_1-BRINKER',
+        "CHILI\'S BRINKER OFFC ACCT", '15-SEP-18', 13.0, 179.79, 13.83),
+       createData('AVOCADO BR CT. 48CT', 'FRESHPOINT_108', "BRINKER CHILI\'S #1309",
+        '01-SEP-18', 5.0, 273.5, 54.7),
+       createData('BEEF BURGER 8 OZ FRESH', 'MAINES_1-BRINKER',
+        "CHILI\'S BRINKER OFFC ACCT", '03-AUG-18', 4.0, 307.32, 76.83),
+       createData('CORN DOG, W/STICK ORIGINAL', 'YHATA_001',
+        "BRINKER INTL - CHILI\'S", '03-MAY-17', 9.0, 260.73, 28.97),
+       createData('FRIES--3/8"CUT COATED ZTF 6/6#', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #501", '21-DEC-18', 14.0, 305.89, 22.07),
+       createData('FRIES--3/8"CUT COATED ZTF 6/6#', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #670", '04-JAN-19', 14.0, 305.89, 22.07),
+       createData('FRIES--3/8"CUT COATED ZTF 6/6#', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #1553", '04-JAN-19', 14.0, 305.89, 22.07),
+       createData('FRIES--3/8"CUT COATED ZTF 6/6#', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #1187", '04-JAN-19', 14.0, 305.89, 22.07),
+       createData('FRIES--3/8"CUT COATED ZTF 6/6#', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #881", '23-NOV-18', 14.0, 305.89, 22.07),
+       createData('BEEF FAJITA MEAT OSC MARINADE', 'MAINES_2-BRINKER',
+        "CHILI\'S BRINKER OFFC ACCT", '16-MAR-17', 1.0, 224.0, 6.73),
+       createData('BASIL--1#', 'FRESHPOINT_158', "BRINKER-MAGGIANO\'S #183",
+        '26-DEC-17', 12.0, 108.11, 9.1),
+       createData('AVOCADO--#2 48CT-BR', 'FRESHPOINT_158', "BRINKER-CHILI\'S #712",
+        '03-AUG-18', 7.0, 261.95, 37.8),
+       createData('AVOCADO--#2 48CT-BR', 'FRESHPOINT_158', "BRINKER-CHILI\'S #712",
+        '02-FEB-18', 7.0, 261.95, 37.8),
+       createData('AVOCADO--#2 60CT BR', 'FRESHPOINT_158', "BRINKER-CHILI\'S #742",
+        '12-JAN-18', 7.0, 268.88, 38.8),
+       createData('AVOCADO--#2 48CT-BR', 'FRESHPOINT_158', "BRINKER-CHILI\'S #1178",
+        '08-AUG-18', 5.0, 251.46, 50.8),
+       createData('LETTUCE--ICEBERG CHPD 1X1 8/2#', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #319", '12-FEB-18', 10.0, 109.69, 11.08),
+       createData('PASTA SPAGHETTI CHITARRA', 'SYSCO024', 'BRINKER INT.',
+        '22-JUN-18', 1.0, 28.3, 28.3),
+       createData('LETTUCE--ICEBERG CHPD 1X1 8/2#', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #1324", '29-NOV-18', 9.0, 91.06, 10.22),
+       createData('LETTUCE--ICEBERG CHPD 1X1 8/2#', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #712", '26-MAY-17', 12.0, 118.21, 9.95),
+       createData('ASPARAGUS--STANDARD 11# BR', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #742", '04-JUN-18', 8.0, 208.45, 26.32),
+       createData('LETTUCE ICEBERG CHOP CT 1" 8/2', 'FRESHPOINT_108',
+        "BRINKER CHI'S MALL OF GA", '27-MAY-17', 10.0, 130.6, 13.06),
+       createData('OIL CLEAR LIQUID FRYING ZTF', 'MAINES_1-BRINKER',
+        "CHILI\'S BRINKER OFFC ACCT", '18-AUG-18', 10.0, 200.8, 20.08),
+       createData('ASPARAGUS--STANDARD 11# BR', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #069", '03-JUL-17', 7.0, 181.08, 26.13),
+       createData('TOMATO--SALSA 25# UBU', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #1229", '06-DEC-17', 8.0, 207.5, 26.2),
+       createData('DESSERT PIE MARGARITA', 'MAINES_1-BRINKER',
+        "CHILI\'S BRINKER OFFC ACCT", '02-NOV-18', 1.0, 59.56, 59.56),
+       createData('LETTUCE--ICEBERG CHPD 1X1 8/2#', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #960", '03-JUL-18', 8.0, 80.94, 10.22),
+       createData('MUSHROOM--75CT TRAY PACK MAGGI', 'FRESHPOINT_158',
+        "BRINKER-MAGGIANO\'S #183", '26-OCT-18', 9.0, 294.03, 33.0),
+       createData('MUSHROOM--75CT TRAY PACK MAGGI', 'FRESHPOINT_158',
+        "BRINKER-MAGGIANO\'S #183", '14-SEP-18', 9.0, 294.03, 33.0),
+       createData('LETTUCE--ICEBERG CHPD 1X1 8/2#', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #069", '03-JUL-17', 10.0, 100.09, 10.11),
+       createData('AVOCADO--HAND SCOOPED 8/2# BR', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #1187", '17-AUG-18', 7.0, 285.52, 41.2),
+       createData('TOMATO--SALSA 25# UBU', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #1162", '26-MAY-18', 10.0, 120.78, 12.2),
+       createData('AVOCADO--#2 48CT-BR', 'FRESHPOINT_158', "BRINKER-CHILI\'S #1065",
+        '11-AUG-18', 6.0, 301.75, 50.8),
+       createData('RIBS PORK LOIN BACK DOMESTIC', 'MAINES_1-BRINKER',
+        "CHILI\'S BRINKER OFFC ACCT", '15-SEP-18', 3.0, 322.32, 2.41),
+       createData('MUSHROOM--BUTTON 10#', 'FRESHPOINT_158',
+        "BRINKER-MAGGIANO\'S #183", '28-DEC-18', 12.0, 258.39, 21.75),
+       createData('MUSHROOM--BUTTON 10#', 'FRESHPOINT_158',
+        "BRINKER-MAGGIANO\'S #183", '09-FEB-18', 12.0, 258.39, 21.75),
+       createData('FRIES--3/8"CUT COATED ZTF 6/6#', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #069", '30-NOV-18', 13.0, 284.04, 22.07),
+       createData('FRIES--3/8"CUT COATED ZTF 6/6#', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #069", '18-JAN-19', 13.0, 284.04, 22.07),
+       createData('FRIES--3/8"CUT COATED ZTF 6/6#', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #881", '18-JAN-19', 13.0, 284.04, 22.07),
+       createData('FRIES--3/8"CUT COATED ZTF 6/6#', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #069", '16-NOV-18', 13.0, 284.04, 22.07),
+       createData('FRIES--3/8"CUT COATED ZTF 6/6#', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #502", '30-NOV-18', 13.0, 284.04, 22.07),
+       createData('FRIES--3/8"CUT COATED ZTF 6/6#', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #069", '25-JAN-19', 13.0, 284.04, 22.07),
+       createData('FRIES--3/8"CUT COATED ZTF 6/6#', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #1187", '25-JAN-19', 13.0, 284.04, 22.07),
+       createData('FRIES--3/8"CUT COATED ZTF 6/6#', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #1187", '09-NOV-18', 13.0, 284.04, 22.07),
+       createData('CORN COB 5.5 INCH', 'MAINES_1-BRINKER',
+        "CHILI\'S BRINKER OFFC ACCT", '18-AUG-18', 10.0, 182.3, 18.23),
+       createData('RIBS PORK LOIN BACK DOMESTIC', 'MAINES_1-BRINKER',
+        "CHILI\'S BRINKER OFFC ACCT", '15-SEP-18', 3.0, 307.75, 2.41),
+       createData('RIBS PORK LOIN BACK DOMESTIC', 'MAINES_1-BRINKER',
+        "CHILI\'S BRINKER OFFC ACCT", '15-SEP-18', 3.0, 306.81, 2.41),
+       createData('BUN BRIOCHE 4 IN', 'MAINES_1-BRINKER',
+        "CHILI\'S BRINKER OFFC ACCT", '15-SEP-18', 11.0, 154.11, 14.01),
+       createData('BUN BRIOCHE 4 IN', 'MAINES_1-BRINKER',
+        "CHILI\'S BRINKER OFFC ACCT", '15-SEP-18', 11.0, 154.11, 14.01),
+       createData('BUN BRIOCHE 4 IN', 'MAINES_1-BRINKER',
+        "CHILI\'S BRINKER OFFC ACCT", '15-SEP-18', 11.0, 154.11, 14.01),
+       createData('PIE MARGARITA', 'MBM2', 'BRINKER TEST KITCHEN 9998',
+        '05-NOV-18', 5.0, 297.3, 59.46),
+       createData('AVOCADO BR CT. 48CT', 'FRESHPOINT_108',
+        "BRINKER CHILI\'S FLOWERY B", '28-OCT-17', 6.0, 325.2, 54.2),
+       createData('SPRING MIX--4/3# BR', 'FRESHPOINT_158', "BRINKER-CHILI\'S #712",
+        '14-DEC-18', 5.0, 153.05, 30.92),
+       createData('LETTUCE ICEBERG CHOP CT 1" 8/2', 'FRESHPOINT_108',
+        "BRINKER CHILI\'S #455", '02-JUL-18', 8.0, 110.0, 13.75),
+       createData('MESCLUN--3#', 'FRESHPOINT_158', "BRINKER-CHILI\'S #1306",
+        '06-MAR-17', 8.0, 107.71, 13.6),
+       createData('MESCLUN--3#', 'FRESHPOINT_158', "BRINKER-CHILI\'S #742",
+        '06-MAR-17', 8.0, 107.71, 13.6),
+       createData('CILANTRO--CLEANED 1#--BG', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #069", '03-JUL-17', 13.0, 60.75, 4.72),
+       createData('AVOCADO--#2 60CT BR', 'FRESHPOINT_158', "BRINKER-CHILI\'S #057",
+        '06-AUG-18', 5.0, 251.46, 50.8),
+       createData('LETTUCE ICEBERG CHOP CT 1" 8/2', 'FRESHPOINT_108',
+        "BRINKER-CHILI\'S DALTON", '31-MAR-18', 9.0, 123.39, 13.71),
+       createData('LETTUCE ICEBERG CHOP CT 1" 8/2', 'FRESHPOINT_108',
+        "BRINKER-CHILI\'S DALTON", '14-APR-18', 9.0, 123.39, 13.71),
+       createData('LETTUCE--ROMAINE CHPD 1X1 6/2#', 'FRESHPOINT_158',
+        "BRINKER-MAGGIANO\'S #183", '31-AUG-18', 12.0, 164.42, 13.84),
+       createData('AVOCADO BR CT. 60CT #2', 'FRESHPOINT_108',
+        "BRINKER CHILI\'S P'DENCE", '04-AUG-17', 5.0, 248.5, 49.7),
+       createData('AVOCADO--HAND SCOOPED 8/2# BR', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #742", '30-DEC-17', 6.0, 258.03, 43.44),
+       createData('AVOCADO--HAND SCOOPED 8/2# BR', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #742", '21-OCT-17', 6.0, 258.03, 43.44),
+       createData('AVOCADO--HAND SCOOPED 8/2# BR', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #319", '10-JUN-17', 6.0, 258.03, 43.44),
+       createData('AVOCADO--HAND SCOOPED 8/2# BR', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #1553", '23-DEC-17', 6.0, 258.03, 43.44),
+       createData('AVOCADO--HAND SCOOPED 8/2# BR', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #504", '27-MAY-17', 6.0, 258.03, 43.44),
+       createData('AVOCADO--HAND SCOOPED 8/2# BR', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #304", '06-MAY-17', 6.0, 258.03, 43.44),
+       createData('AVOCADO--#2 48CT-BR', 'FRESHPOINT_158', "BRINKER-CHILI\'S #670",
+        '04-AUG-17', 5.0, 246.51, 49.8),
+       createData('AVOCADO--#2 48CT-BR', 'FRESHPOINT_158', "BRINKER-CHILI\'S #742",
+        '04-AUG-17', 5.0, 246.51, 49.8),
+       createData('AVOCADO--#2 48CT-BR', 'FRESHPOINT_158', "BRINKER-CHILI\'S #670",
+        '28-DEC-18', 4.0, 142.76, 36.05),
+       createData('FRIES--3/8"CUT COATED ZTF 6/6#', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #742", '26-JAN-19', 14.0, 305.89, 22.07),
+       createData('FRIES--3/8"CUT COATED ZTF 6/6#', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #1066", '29-DEC-18', 14.0, 305.89, 22.07),
+       createData('FRIES--3/8"CUT COATED ZTF 6/6#', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #970", '10-NOV-18', 14.0, 305.89, 22.07),
+       createData('FRIES--3/8"CUT COATED ZTF 6/6#', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #960", '10-NOV-18', 14.0, 305.89, 22.07),
+       createData('FRIES--3/8"CUT COATED ZTF 6/6#', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #1176", '10-NOV-18', 14.0, 305.89, 22.07),
+       createData('MUSHROOM--LARGE 1 3/4"-2 1/2', 'FRESHPOINT_158',
+        "BRINKER-MAGGIANO\'S #183", '22-DEC-17', 10.0, 248.98, 25.15),
+       createData('MUSHROOM--LARGE 1 3/4"-2 1/2', 'FRESHPOINT_158',
+        "BRINKER-MAGGIANO\'S #183", '09-JUN-17', 10.0, 248.98, 25.15),
+       createData('LETTUCE--ROMAINE CHPD 1X1 8/2#', 'FRESHPOINT_158',
+        "BRINKER-MAGGIANO\'S #183", '28-SEP-18', 8.0, 140.18, 17.7),
+       createData('LETTUCE--ROMAINE CHPD 1X1 6/2#', 'FRESHPOINT_158',
+        "BRINKER-MAGGIANO\'S #183", '20-MAR-18', 8.0, 112.86, 14.25),
+       createData('CUP, 20 OZ FOAM BRINKER LOGO', 'MBM35',
+        'BRINKER-OFFICE SERVICES BLDG A', '05-APR-17', 9.0, 201.51,
+        22.39),
+       createData('FRIES--3/8"CUT COATED ZTF 6/6#', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #745", '26-DEC-18', 11.0, 240.34, 22.07),
+       createData('FRIES--3/8"CUT COATED ZTF 6/6#', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #1187", '23-JAN-19', 11.0, 240.34, 22.07),
+       createData('FRIES--3/8"CUT COATED ZTF 6/6#', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #1439", '16-JAN-19', 11.0, 240.34, 22.07),
+       createData('FRIES--3/8"CUT COATED ZTF 6/6#', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #670", '21-NOV-18', 11.0, 240.34, 22.07),
+       createData('FRIES--3/8"CUT COATED ZTF 6/6#', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #1439", '23-JAN-19', 11.0, 240.34, 22.07),
+       createData('FRIES--3/8"CUT COATED ZTF 6/6#', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #501", '05-DEC-18', 11.0, 240.34, 22.07),
+       createData('FRIES--3/8"CUT COATED ZTF 6/6#', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #970", '14-NOV-18', 11.0, 240.34, 22.07),
+       createData('FRIES--3/8"CUT COATED ZTF 6/6#', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #501", '21-NOV-18', 11.0, 240.34, 22.07),
+       createData('LETTUCE--ICEBERG CHPD 1X1 8/2#', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #712", '28-APR-17', 7.0, 110.53, 15.95),
+       createData('LETTUCE--ICEBERG CHPD 1X1 8/2#', 'FRESHPOINT_158',
+        "BRINKER-CHILI\'S #069", '05-MAY-17', 7.0, 110.53, 15.95),
+       createData('CHIX FRIED UNCOOKED', 'MAINES_1-BRINKER',
+        "CHILI\'S BRINKER OFFC ACCT", '15-SEP-18', 2.0, 97.18, 48.59),
     ],
     page: 0,
-    rowsPerPage: 5,
+    rowsPerPage: 10,
   };
 
   handleRequestSort = (event, property) => {
@@ -313,10 +510,13 @@ class EnhancedTable extends React.Component {
                       <TableCell component="th" scope="row" padding="none">
                         {n.name}
                       </TableCell>
-                      <TableCell align="right">{n.calories}</TableCell>
-                      <TableCell align="right">{n.fat}</TableCell>
-                      <TableCell align="right">{n.carbs}</TableCell>
-                      <TableCell align="right">{n.protein}</TableCell>
+                      <TableCell align="right">{n.org}</TableCell>
+                      <TableCell align="right">{n.act}</TableCell>
+                      <TableCell align="right">{n.trans}</TableCell>
+                      <TableCell align="right">{n.delivQ}</TableCell>
+                      <TableCell align="right">{n.delivP}</TableCell>
+                      <TableCell align="right">{n.uniP}</TableCell>
+
                     </TableRow>
                   );
                 })}
@@ -343,6 +543,7 @@ class EnhancedTable extends React.Component {
           onChangePage={this.handleChangePage}
           onChangeRowsPerPage={this.handleChangeRowsPerPage}
         />
+        <div style={styles.image}> <img src="static/beans.png" width="50%" height="auto"/> </div>
       </Paper>
     );
   }
