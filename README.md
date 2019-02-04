@@ -1,5 +1,8 @@
-# Auto Anomaly
-Autonomous Anomaly Detection via Autoencoders
+# SLO HACKS 2019, a 36-hour, 500-student collegiate hackathon at Cal Poly SLO
+Winner of the following:
+Best AI/ML Hack
+1st Place in iTradeNetwork’s anomaly detection challenge
+Top 5 Overall Hacks
 
 ## Run Locally
 
