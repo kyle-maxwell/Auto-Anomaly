@@ -20,16 +20,16 @@ def swap_orgs(row):
         return row['GROUPED_ORG']
     
 def swap_accs(row):
-    if 'CHILI\'S' in row['GROUPED_ACC']:# row['GROUPED_ACC'].contains('CHILI\'S'):
-        return 0 # 'CHILIS'
-    elif 'CHI' in row['GROUPED_ACC']:# row['GROUPED_ACC'].contains('CHI'):
-        return 0 # 'CHILIS'
-    elif 'MAGGIANO' in row['GROUPED_ACC']: # row['GROUPED_ACC'].contains('MAGGIANO\'S'):
-        return 1 # 'MAGGIANOS'
-    elif 'INTL' in row['GROUPED_ACC']:# row['GROUPED_ACC'].contains('INTL'):
-        return 2 # 'INTL'
+    if 'CHILI\'S' in row['GROUPED_ACC']:
+        return 0  
+    elif 'CHI' in row['GROUPED_ACC']:
+        return 0 
+    elif 'MAGGIANO' in row['GROUPED_ACC']: 
+        return 1 
+    elif 'INTL' in row['GROUPED_ACC']:
+        return 2 
     else:
-        return 3 # 'MISC'
+        return 3 
     
 def swap_orgs_final(row):
     return orgz[row['finals']]
@@ -61,15 +61,15 @@ def strip_extra_description(row):
     even_less = re.split(r'\*l*', less)[0]
     return even_less
 
-top15 = {}
-numerical_vals = {}
-def take_first(data):
+# top15 = {}
+# numerical_vals = {}
+def take_first(data, top15, numerical_vals):
     for desc in data['PROC_NAME'].split(' '):
         if desc in list(top15['Name'].values):
             return numerical_vals[desc]
     return 25
 
-def everything_lol(df):
+def clean_data(df):
     df_dropped = df
 
     upper_limit = df_dropped['UNIT_PRICE'].quantile(0.999)
@@ -113,17 +113,19 @@ def everything_lol(df):
     together = np.hstack((stacked_acc, onehotting5))
     with_date = np.hstack((together, hot_date))
     
-    # Save np array
+    # Save np array of attributes up to the date
     np.save('with_date.npy', with_date)
-    
-    return
+
     
     ## ITEM DESCRIPTION WORK
-    dropped_vals['PROC_NAME'] = dropped_vals['DC_PROD_NAME'].str.lower()#strip('0123456789-_')
+    dropped_vals['PROC_NAME'] = dropped_vals['DC_PROD_NAME'].str.lower()
     dropped_vals['PROC_NAME'] = dropped_vals.apply(strip_extra_description, axis=1)
 
-    # Bucket Desc
 
+    # Current model does not use the product's name, hence the early return statement. 
+    # return
+
+    # Turn Product Name into a Categorical Value using Bag of Words Model
     itemCount = {}
     for value in list(dropped_vals['PROC_NAME']):
         for desc in value.split(' '):
@@ -133,7 +135,8 @@ def everything_lol(df):
                 itemCount[desc] = 1
                 
     
-    # Drop predefined useless descriptions
+    # Drop word values that are closely linked to other words
+    # EX: 'Spring' and 'Mix' always appear together, so we drop 'Spring' in exchange for more meaningful words
     itemCount.pop('', None)
     itemCount.pop('br', None)
     itemCount.pop('ct', None)
@@ -159,12 +162,13 @@ def everything_lol(df):
 
     numerical_vals = dict((k, v) for (k,v) in zip(top15['Name'].values, np.arange(0,25)))
 
-    dropped_vals['MIN_NAME'] = dropped_vals.apply(take_first, axis=1)
+    dropped_vals['MIN_NAME'] = dropped_vals.apply(take_first, axis=1, args=(top15, numerical_vals))
+
+    # One-hot encode the categorical representation of product names
     hot_names = to_categorical(dropped_vals['MIN_NAME'].values[:,np.newaxis]).tolist()
 
-
+    # Create new numpy file with encoding of product name
     bucket_names = np.hstack((with_date, hot_names))
     
     np.save('hot_names.npy', bucket_names)
-
-
+    return dropped_vals
