@@ -138,7 +138,7 @@ class Dashboard extends React.Component {
   delayState = () => {
     setTimeout(
     function() {
-        this.setState({page: 'home'});
+        this.setState({page: 'analysis'});
     }
     .bind(this),
     3000);
@@ -181,7 +181,7 @@ class Dashboard extends React.Component {
               noWrap
               className={classes.title}
             >
-              Dashboard
+              Auto Anomaly
             </Typography>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
