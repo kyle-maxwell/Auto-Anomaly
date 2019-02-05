@@ -6,15 +6,6 @@ Best AI/ML Hack
 
 Top 5 Overall Hacks
 
-## Run Locally
-
-1. npm install
-2. pip3 install -r requirements.txt
-2. npm run dev (or "npm run start" in a different terminal to have the changes incorporate live
-4. python3 server.py
-5. Go to http://localhost:3000
-6. Use 'CTRL+SHIFT+R' to override the cache and reload the page
-
 ## Inspiration
 
 iTradeNetwork's Anomaly Detection Challenge!
@@ -35,3 +26,13 @@ At the start of the hackathon, our team composed of four group members. However,
 ## Accomplishments that we're proud of
 
 We are extremely happy about the algorithms we wrote to clean and analyze the data! We fought through the struggles of losing teammates and learning new packages/frameworks and were still able to get very close to our end goal.
+
+
+## Running the web app locally
+
+1. npm install
+2. pip3 install -r requirements.txt
+2. npm run dev (or "npm run start" in a different terminal to have the changes incorporate live
+4. python3 server.py
+5. Go to http://localhost:3000
+6. Use 'CTRL+SHIFT+R' to override the cache and reload the page
