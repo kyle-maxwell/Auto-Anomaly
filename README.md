@@ -16,16 +16,17 @@ The iTradeNetwork challenge is to develop a system to detect anomalies within th
 
 ## How we built it
 
-After extensive data cleaning,  we developed and trained an autoencoder neural network architecture to embed the data samples. From there, we can algorithmically detect anomalies that rule-sets are likely to miss.
-On the front end, we provide the service to the end-user through an easy-to-use web application.
+After extensive data cleaning, we trained an autoencoder neural network to develop embeddings for the data samples. From there, we used the Local Outlier Factor algorithm to detect outliers among the embedded samples within the latent space. The samples that corrspond to those embeddings can then be examined as potential anomalies that rule-sets are likely to miss.
+
+We provide the service to the end-user through an easy-to-use web application. Built with React/Node.js/Flask, the user can easily explore the potential anomalies.
 
 ## Challenges we ran into
 
-At the start of the hackathon, our team composed of four group members. However, as time went on, the team size fell to two. With the same goal in mind, we worked with cutting-edge machine learning algorithms that neither of us have ever written. Asides from that, we were working with quite dirty data and utilizing web frameworks that we have minimal experience in.
+At the start of the hackathon, our team composed of four group members. However, as time went on, the team size fell to two. With the same goal in mind, we worked with machine learning algorithms that neither of us had much experience with. Additionally, we were working with quite dirty data and utilizing web frameworks that we have minimal experience in.
 
 ## Accomplishments that we're proud of
 
-We are extremely happy about the algorithms we wrote to clean and analyze the data! We fought through the struggles of losing teammates and learning new packages/frameworks and were still able to get very close to our end goal.
+We are extremely happy about the systems we developed to clean and analyze the data! We fought through the struggles of losing teammates and learning new packages/frameworks and were still able to reach most of our goals!
 
 
 ## Running the web app locally
