@@ -4,7 +4,7 @@ import os
 from werkzeug import secure_filename
 from flask import Flask, render_template, request
 import pandas as pd
-from ML.CleanData import everything_lol
+#from ML.CleanData import everything_lol
 
 
 app = Flask(__name__)
